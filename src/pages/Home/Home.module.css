@@ -1,0 +1,12 @@
+
+
+.home_list{
+    display: flex;
+    flex-direction: column;
+  
+    list-style: none;
+}
+
+.homeitem{
+    margin-bottom: 10px;
+}

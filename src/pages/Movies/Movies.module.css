@@ -1,0 +1,19 @@
+
+.movies_input{
+    margin: 10px auto;
+    width: 200px;
+   
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+
+}
+.movies_button{
+    margin: 10px auto;
+    width: 100px;
+   
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: pointer;
+}
