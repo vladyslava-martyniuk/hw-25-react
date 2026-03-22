@@ -1,4 +1,7 @@
-
+.movies_list{
+    list-style: none;
+    
+}
 .movies_input{
     margin: 10px auto;
     width: 200px;
