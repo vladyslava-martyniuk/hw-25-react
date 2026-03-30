@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { searchMovies } from "../../api/moviesApi";
 import style from "./Movies.module.css";
 
@@ -7,12 +7,20 @@ export default function Movies() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
 
+ 
+  const location = useLocation();
+  console.log();
+  if (location.state) {
+    setQuery(location.state.query);
+    searchMovies(location.state.query).then(setMovies);
+  }
+console.log(location);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await searchMovies(query);
     setMovies(data);
   };
-
+  
   return (
     <div>
       <h1 className={style.movies_title}>Search Movies</h1>
@@ -31,7 +39,7 @@ export default function Movies() {
       <ul className={style.movies_list}>
         {movies.map(item => (
           <li key={item.movie.ids.trakt}>
-            <Link to={`/movies/${item.movie.ids.trakt}`}>
+            <Link to={`/movies/${item.movie.ids.trakt}`}state={{from: location, query}}>
               {item.movie.title} ({item.movie.year})
             </Link>
           </li>

@@ -6,7 +6,7 @@ export default function Navigation() {
     <nav>
       <NavLink className={style. nav_link} to="/">Home</NavLink>
       {" | "}
-      <NavLink className={style.nav_link} to="/movies-search">Movies</NavLink>
+      <NavLink className={style.nav_link} to="/movies">Movies</NavLink>
     </nav>
   );
 }

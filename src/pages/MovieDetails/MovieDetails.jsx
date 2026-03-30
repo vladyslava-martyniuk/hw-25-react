@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, Outlet } from "react-router-dom";
+import {
+  useParams,
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { getMovieDetails } from "../../api/moviesApi";
 import style from "./MovieDetails.module.css";
 
@@ -8,12 +14,17 @@ export default function MovieDetails() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(navigate);
+  console.log(location);
+  const BackLink = location?.state?.from || "/";
 
   useEffect(() => {
     setLoading(true);
     getMovieDetails(movieId)
       .then(setMovie)
-      .catch(err => setError(err.message))
+      .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [movieId]);
 
@@ -22,14 +33,19 @@ export default function MovieDetails() {
   if (!movie) return <p>No movie found</p>;
 
   const posterUrl = movie.images?.poster?.[0]
-  ? `https://${movie.images.poster[0]}`
-  : "https://via.placeholder.com/300x450?text=No+Image";
+    ? `https://${movie.images.poster[0]}`
+    : "https://via.placeholder.com/300x450?text=No+Image";
   return (
     <div className={style.details}>
-      <h2>{movie.title} ({movie.year})</h2>
+      <button  className={style.back} onClick={() => navigate(BackLink)}>Back</button>
+      <h2>
+        {movie.title} ({movie.year})
+      </h2>
       <img src={posterUrl} alt={movie.title} className={style.poster} />
       <p>{movie.overview}</p>
-      <p><strong>Rating:</strong> {movie.rating}</p>
+      <p>
+        <strong>Rating:</strong> {movie.rating}
+      </p>
 
       <nav className={style.nav}>
         <Link to="cast">Cast</Link> | <Link to="reviews">Reviews</Link>

@@ -45,3 +45,14 @@
 .details .nav a:hover {
   color: #ffd700;
 }
+
+.back {
+  margin: 10px auto;
+  width: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  cursor: pointer;
+}
